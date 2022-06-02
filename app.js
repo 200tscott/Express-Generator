@@ -7,7 +7,11 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var datetimeRouter = require('./routes/datetime');
-// var blogsRouter = require('./routes/blogs');
+var blogRouter = require('./routes/blogs');
+
+var { mongoConnect } = require('./mongo.js');
+mongoConnect();
+
 var app = express();
 
 // view engine setup
@@ -23,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/datetime', datetimeRouter);
+app.use('/blogs', blogRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
